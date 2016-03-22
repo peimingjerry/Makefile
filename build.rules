@@ -1,0 +1,17 @@
+
+# Rule to generate dependencies
+$(OBJ_DIR)/%.d : %.c
+	$(WHISPER) $(ECHO) "Generating dependencies for $< ($(OPTTYPE))"; \
+	$(CC_DEP) $(INCLUDE_DIRS) $(CC_FLAG) $< \
+    | sed -e 's/cpp: \".*$$/ \\/g' \
+          -e '/: warning:/d' \-e '/: warning:/d' \
+          -e 's% /usr/[^ ]*%%g' \
+          -e '/^[ ]*\\$$/d' \
+          -e "s#^\(.*\)\.o#$(OBJ_DIR)/$$d\1.d $(OBJ_DIR)/$$d\1.o#" \
+    > $@
+
+# Rules to compile C files
+$(OBJ_DIR)/%.o : %.c
+	$(WHISPER) $(ECHO) "Compiling C file" $< "($(OPTTYPE))"
+	$(WHISPER) $(CC) $(CC_FLAG) $(INCLUDE_DIRS) -o $@ -c $<
+
