@@ -1,0 +1,8 @@
+
+force :
+REC_DIRS	:= $(strip $(REC_DIRS))
+
+$(REC_DIRS) : force
+	$(WHISPER) $(ECHO) "Processing" $@
+	$(WHISPER) $(MAKE) $(CD_FLAG) -k -C $@
+
