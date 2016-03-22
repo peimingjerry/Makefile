@@ -1,0 +1,20 @@
+
+WHISPER := @
+ECHO	:= echo
+CC	:= gcc
+LD	:= gcc
+AR      := ar cr
+RM      := rm -rf
+
+CC_FLAG	:= -Wall -Wextra
+CC_DEP  := $(CC) -MM
+CD_FLAG	:= --no-print-directory
+OPTTYPE	:= optimize
+
+ifeq ($(OPTMODE), debug)
+	CC_FLAG += -g
+	OPTTYPE = debug
+endif
+
+OBJ_DIR := $(ROOT)/obj
+
