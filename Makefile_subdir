@@ -1,0 +1,11 @@
+
+ROOT	:= ..
+
+include $(ROOT)/build.variables
+
+LIB_NAME	:= linkage
+LIB_SRC		:= linkage.c
+
+include $(ROOT)/library.rules
+include $(ROOT)/build.rules
+
